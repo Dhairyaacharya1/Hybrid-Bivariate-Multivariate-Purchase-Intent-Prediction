@@ -1,115 +1,172 @@
-# Hybrid-Bivariate-Multivariate-Purchase-Intent-Prediction
-Hybrid deep learning model for purchase intent prediction combining Factorization Machines (FM) and Deep Neural Networks (DeepFM). Captures low- and high-order feature interactions to improve prediction accuracy using behavioral and demographic data.
-
-This project implements a hybrid deep learning architecture to predict consumer purchase intent by combining both bivariate (low-order) and multivariate (high-order) feature interactions. The model leverages Factorization Machines (FM) and deep neural networks (DeepFM) to improve prediction performance.
-
----
+# 🛒 Bivariate–Multivariate Hybrid Models for Purchase Intent Prediction
 
 ## 📌 Overview
 
-Understanding customer purchase intent is critical in marketing analytics and recommendation systems. Traditional models struggle to capture complex feature interactions. This project addresses this by combining shallow and deep models to learn both simple and complex relationships in the data.
+This project focuses on predicting **user purchase intent** using e-commerce clickstream data. It explores and compares traditional machine learning models, deep learning models, and hybrid approaches.
+
+The main contribution of this project is the development of a **Hybrid XGBoost Voting Model**, which combines multiple XGBoost models to achieve improved and balanced performance across evaluation metrics.
 
 ---
 
-## 🎯 Objective
+## 🎯 Objectives
 
-* Predict whether a user will make a purchase
-* Capture both low-order and high-order feature interactions
-* Improve prediction accuracy using hybrid modeling
+* Analyze user behavior using clickstream data
+* Handle class imbalance using SMOTE
+* Compare multiple modeling approaches
+* Develop a hybrid model for improved prediction performance
+* Evaluate models using standard classification metrics
 
 ---
 
 ## 📊 Dataset
 
-The dataset contains behavioral and demographic features such as:
-
-* User activity data
-* Product interactions
-* Demographic attributes
-* Historical engagement patterns
-
-Target variable:
-
-* Purchase Intent (0/1)
-
-Due to dataset size limitations, the dataset is not included in this repository.
+* **Dataset Name:** Online Shoppers Intention Dataset
+* **Type:** E-commerce clickstream data
+* **Instances:** ~12,330 sessions
+* **Features:** 18 attributes
+* **Target Variable:** `Revenue` (Purchase / No Purchase)
 
 ---
 
-## ⚙️ Tech Stack
-
-* Python
-* TensorFlow / Keras (for deep learning)
-* Scikit-learn
-* Pandas, NumPy
-* Matplotlib / Seaborn
-
----
-
-## 🧩 Model Architecture
-
-### 🔹 Factorization Machines (FM)
-
-* Captures **low-order (pairwise) feature interactions**
-* Efficient for sparse and high-dimensional data
-
-### 🔹 Deep Neural Network (DeepFM)
-
-* Learns **high-order feature interactions**
-* Captures complex nonlinear relationships
-
-### 🔹 Hybrid Approach
-
-* Combines FM + Deep Neural Network
-* Enables learning of both simple and complex patterns
-
----
-
-## 🔍 Methodology
+## ⚙️ Methodology
 
 ### 1. Data Preprocessing
 
-* Handled missing values
-* Encoded categorical variables
-* Normalized numerical features
+* Label Encoding for categorical features
+* Standardization using StandardScaler
+* Train-Test Split
 
 ### 2. Feature Engineering
 
-* Created meaningful input representations
-* Selected relevant features for interaction modeling
+* Feature Selection using Chi-Square (SelectKBest)
+* Dimensionality Reduction using PCA
 
-### 3. Model Training
+### 3. Handling Imbalance
 
-* Loss Function: Binary Cross-Entropy
-* Optimizer: Adam
-* Activation: ReLU / Sigmoid
+* SMOTE (Synthetic Minority Over-sampling Technique)
 
-### 4. Model Evaluation
+### 4. Model Development
 
-* Accuracy
-* Precision, Recall
-* ROC-AUC
+#### 🔹 Traditional ML Models
 
----
+* Logistic Regression
+* Random Forest
+* XGBoost
 
-## 📈 Results
+#### 🔹 Deep Learning Models
 
-* Achieved strong prediction performance using hybrid modeling
-* Improved accuracy compared to traditional models
-* Successfully captured complex feature interactions
+* Artificial Neural Network (ANN)
+* DeepFM
+* xDeepFM
+* AutoInt
 
----
+#### 🔹 Proposed Model
 
-## 💡 Key Insights
-
-* Combining FM and deep learning significantly improves prediction performance
-* Feature interactions play a critical role in purchase intent modeling
-* Hybrid architectures outperform single-model approaches
+* **Hybrid XGBoost Voting Model**
 
 ---
 
-## 🚀 Future Improvements
+## 📈 Results Summary
 
-* Implement advanced architectures like xDeepFM or AutoInt
-* Apply hyperparameter tuning for further optimization
-* Deploy model as a recommendation system API
+| Model                     | Accuracy  | F1-Score  | AUC       |
+| ------------------------- | --------- | --------- | --------- |
+| Logistic Regression       | 0.864     | 0.615     | 0.882     |
+| Random Forest             | 0.847     | 0.576     | 0.880     |
+| XGBoost                   | 0.868     | 0.643     | 0.867     |
+| ANN                       | 0.871     | 0.649     | 0.911     |
+| DeepFM                    | 0.890     | 0.662     | 0.889     |
+| Hybrid XGBoost (Proposed) | **0.874** | **0.650** | **0.910** |
+
+📌 The Hybrid XGBoost model provides the most **balanced and reliable performance**.
+
+---
+
+## 🧠 Key Insights
+
+* Hybrid models outperform standalone models
+* XGBoost is highly effective for structured data
+* Deep learning captures complex interactions but requires tuning
+* Handling class imbalance significantly improves recall
+
+---
+
+## 🛠️ Technologies Used
+
+* Python
+* Scikit-learn
+* XGBoost
+* TensorFlow / Keras
+* Pandas, NumPy
+* Matplotlib, Seaborn
+
+---
+
+## 📂 Project Structure
+
+```
+├── data/
+│   └── online_shoppers_intention.csv
+├── notebooks/
+│   └── Bivariate_Multivariate_Hybrid_Models.ipynb
+├── docs/
+│   ├── research_paper.pdf
+│   ├── presentation.pptx
+│   └── poster.pdf
+├── README.md
+```
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/purchase-intent-prediction.git
+```
+
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the notebook:
+
+```bash
+jupyter notebook
+```
+
+---
+
+## 📌 Future Work
+
+* Hyperparameter tuning of deep models
+* Integration of sequential models (LSTM, GRU)
+* Real-time deployment
+* Transformer-based approaches
+
+---
+
+## 📚 References
+
+* Rendle (2010) – Factorization Machines
+* Guo et al. (2017) – DeepFM
+* Lian et al. (2018) – xDeepFM
+* Song et al. (2019) – AutoInt
+* Chawla et al. (2002) – SMOTE
+
+---
+
+## 👤 Author
+
+**Dhairya Bharat Acharya**
+Gujarat University
+
+---
+
+## ⭐ Acknowledgment
+
+This project was developed as part of an academic research study in Artificial Intelligence and Machine Learning.
+
+---
